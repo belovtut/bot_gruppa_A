@@ -7,6 +7,8 @@ from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
+# Импортируем модуль для настройки кастомного сервера API
+from aiogram.client.telegram import TelegramAPIServer
 
 from bot import config
 from bot.handlers import router
@@ -30,10 +32,15 @@ async def main() -> None:
             "BOT_TOKEN is not set! Create a .env file with BOT_TOKEN=your_token_here"
         )
         return
+    
+    PROXY_URL = "https://gruppa-a-tg-prx.tobi3-14zda.workers.dev"
+
+    custom_api_server = TelegramAPIServer.from_base(PROXY_URL)
 
     bot = Bot(
         token=config.SETTINGS.bot_token,
         default=DefaultBotProperties(parse_mode=ParseMode.HTML),
+        api_server=custom_api_server,
     )
     dp = Dispatcher()
 
