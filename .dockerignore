@@ -1,0 +1,13 @@
+__pycache__
+*.pyc
+*.pyo
+.git
+.gitignore
+.env
+.env.example
+*.md
+.vscode
+.idea
+*.db
+*.db-wal
+*.db-shm
